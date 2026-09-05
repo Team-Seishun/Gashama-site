@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gashama | ガシャ活を、もっとスマートに</title>
+<meta name="description" content="ガシャポンの在庫をリアルタイムで共有し、被った景品をユーザー同士で交換できるアプリ「Gashama」の紹介サイト">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-capsule" aria-hidden="true"></span>
+      Gashama
+    </a>
+    <nav class="nav" aria-label="サイト内ナビゲーション">
+      <a href="#problem">課題</a>
+      <a href="#features">特徴</a>
+      <a href="#how">使い方</a>
+      <a href="#tech">技術スタック</a>
+      <a href="#team">チーム</a>
+    </nav>
+    <a class="btn btn-ghost header-cta" href="#cta">開発チームに連絡</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">ガシャ活支援アプリ</p>
+        <h1>「欲しい」を逃さない。<br><span class="accent">「被り」</span>を、無駄にしない。</h1>
+        <p class="hero-lead">
+          Gashama（ガシャマ）は、ガシャポンの在庫状況をリアルタイムに地図で共有し、
+          ユーザー同士でダブった景品を交換できるコミュニティアプリです。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#cta">プロジェクトを見る</a>
+          <a class="btn btn-secondary" href="#features">できることを見る</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="capsule-machine">
+          <div class="capsule c1"></div>
+          <div class="capsule c2"></div>
+          <div class="capsule c3"></div>
+          <div class="capsule c4"></div>
+          <div class="capsule c5"></div>
+          <div class="pin"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem" class="section problem">
+    <div class="wrap">
+      <h2 class="section-title">こんな「ガシャ活あるある」、ありませんか？</h2>
+      <div class="card-grid">
+        <div class="pain-card">
+          <div class="pain-icon">🔍</div>
+          <h3>探し回って空振り</h3>
+          <p>欲しい景品の情報がなく、何店舗も回ったのに売り切れだった。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">📦</div>
+          <h3>被り景品の行き場がない</h3>
+          <p>同じ景品が何個も出てしまい、収納にも困るし手放す手段もない。</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🗺️</div>
+          <h3>在庫情報がバラバラ</h3>
+          <p>SNSで探しても情報が古かったり、正確な設置場所が分からない。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section features">
+    <div class="wrap">
+      <h2 class="section-title">Gashamaでできること</h2>
+      <p class="section-lead">在庫の「見える化」と、ユーザー同士の「交換」で、ガシャ活をもっと楽しく効率的に。</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-badge">MAP</div>
+          <h3>リアルタイム在庫マップ</h3>
+          <p>近くのガシャポン設置店舗の在庫状況を地図上で確認。今どこに何が残っているかが一目で分かります。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-badge">SWAP</div>
+          <h3>ユーザー間トレード掲示板</h3>
+          <p>被った景品を出品し、欲しい人と交換。コンプリートまでの最後の一歩を後押しします。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-badge">POST</div>
+          <h3>投稿でみんなに貢献</h3>
+          <p>見つけた在庫を投稿してコミュニティに共有。新鮮な情報がどんどん集まる仕組みです。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-badge">POINT</div>
+          <h3>ポイントシステム（開発中）</h3>
+          <p>在庫投稿でポイントを獲得し、自分のトレード投稿の露出を上げられる仕組みを設計中です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section how">
+    <div class="wrap">
+      <h2 class="section-title">使い方はシンプルに3ステップ</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num">1</span>
+          <h3>探す</h3>
+          <p>マップで近くの店舗の在庫を確認。欲しい景品がある場所をすぐに見つけられます。</p>
+        </li>
+        <li class="step">
+          <span class="step-num">2</span>
+          <h3>共有する</h3>
+          <p>実際に見つけた在庫や、被ってしまった景品を投稿してコミュニティに共有します。</p>
+        </li>
+        <li class="step">
+          <span class="step-num">3</span>
+          <h3>交換する</h3>
+          <p>欲しい景品を持つユーザーとつながり、トレードでコレクションを完成させます。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="tech" class="section tech">
+    <div class="wrap">
+      <h2 class="section-title">技術スタック</h2>
+      <p class="section-lead">ハッカソンで4人チームによって開発。要件定義からリリースまでのプロセスも大切にしています。</p>
+      <ul class="tech-tags">
+        <li>React Native</li>
+        <li>Expo</li>
+        <li>TypeScript</li>
+        <li>Supabase</li>
+        <li>React Native Maps</li>
+        <li>FlashList</li>
+        <li>Reanimated</li>
+        <li>GitHub Projects / Issues</li>
+        <li>Notion</li>
+        <li>Mermaid</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="team" class="section team">
+    <div class="wrap">
+      <h2 class="section-title">チーム体制</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <h3>4人体制での開発</h3>
+          <p>要件定義はマインドマップとユーザーストーリーを組み合わせて整理。Issue/PRフローなど、なぜその工程が必要かを言語化したチーム開発プロセスのもとで進めています。</p>
+        </div>
+        <div class="team-card">
+          <h3>PM 兼 クライアントエンジニア</h3>
+          <p>メンバーごとのDiscordチャンネルで参考記事とその理由を共有し合う仕組みを運用。設計から実装まで一貫して関わっています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="section cta">
+    <div class="wrap cta-inner">
+      <h2>Gashamaプロジェクトについて</h2>
+      <p>ソースコードや開発の進め方に興味がある方は、GitHubリポジトリをご覧ください。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHubリポジトリへ（リンクを設定してください）</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> Gashama Project</span>
+    <span class="footer-note">Hackathon Project — ガシャポン在庫共有・交換アプリ</span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
