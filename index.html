@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gashama | ガシャ活を、もっとスマートに</title>
 <meta name="description" content="ガシャポンの在庫をリアルタイムで共有し、被った景品をユーザー同士で交換できるアプリ「Gashama」の紹介サイト">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎰</text></svg>">
+<link rel="icon" type="image/png" href="img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,65 +16,67 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="#top" class="logo">
-      <span class="logo-capsule" aria-hidden="true"></span>
+      <img src="img/icon.png" alt="" class="logo-icon">
       Gashama
     </a>
-    <nav class="nav" aria-label="サイト内ナビゲーション">
-      <a href="#problem">課題</a>
-      <a href="#features">特徴</a>
-      <a href="#how">使い方</a>
-      <a href="#tech">技術スタック</a>
-      <a href="#team">チーム</a>
-    </nav>
-    <a class="btn btn-ghost header-cta" href="#cta">開発チームに連絡</a>
+    <a class="btn btn-ghost header-cta" href="#cta">GitHubで見る</a>
   </div>
 </header>
 
 <main id="top">
 
   <section class="hero">
+    <div class="hero-decor" aria-hidden="true">
+      <span class="hero-glow hero-glow--1"></span>
+      <span class="hero-glow hero-glow--2"></span>
+      <img src="img/icon.png" alt="" class="hero-float hero-float--1">
+      <img src="img/icon.png" alt="" class="hero-float hero-float--2">
+    </div>
     <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow">ガシャ活支援アプリ</p>
-        <h1>「欲しい」を逃さない。<br><span class="accent">「被り」</span>を、無駄にしない。</h1>
-        <p class="hero-lead">
+      <p class="eyebrow">ガシャ活支援アプリ</p>
+      <div class="hero-wordmark-row">
+        <img src="img/icon.png" alt="" class="hero-wordmark-icon">
+        <h1 class="hero-wordmark">Gashama</h1>
+      </div>
+      <div class="hero-copy-swap">
+        <p class="hero-tagline">「欲しい」を逃さない。<span class="accent">「被り」</span>を、無駄にしない。</p>
+        <p class="hero-lead hero-overview">
           Gashama（ガシャマ）は、ガシャポンの在庫状況をリアルタイムに地図で共有し、
           ユーザー同士でダブった景品を交換できるコミュニティアプリです。
         </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#cta">プロジェクトを見る</a>
-          <a class="btn btn-secondary" href="#features">できることを見る</a>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="capsule-machine">
-          <div class="capsule c1"></div>
-          <div class="capsule c2"></div>
-          <div class="capsule c3"></div>
-          <div class="capsule c4"></div>
-          <div class="capsule c5"></div>
-          <div class="pin"></div>
-        </div>
       </div>
     </div>
   </section>
+
+  <div class="section-tabs-sentinel"></div>
+  <nav class="section-tabs" aria-label="サイト内ナビゲーション">
+    <div class="wrap section-tabs-inner">
+      <a href="#problem" class="tab-link">課題</a>
+      <a href="#features" class="tab-link">特徴</a>
+      <a href="#how" class="tab-link">使い方</a>
+      <a href="#demo" class="tab-link">デモ</a>
+      <a href="#tech" class="tab-link">技術スタック</a>
+      <a href="#team" class="tab-link">チーム</a>
+      <span class="tab-indicator" aria-hidden="true"></span>
+    </div>
+  </nav>
 
   <section id="problem" class="section problem">
     <div class="wrap">
       <h2 class="section-title">こんな「ガシャ活あるある」、ありませんか？</h2>
       <div class="card-grid">
         <div class="pain-card">
-          <div class="pain-icon">🔍</div>
+          <div class="pain-icon icon-circle">🔍</div>
           <h3>探し回って空振り</h3>
           <p>欲しい景品の情報がなく、何店舗も回ったのに売り切れだった。</p>
         </div>
         <div class="pain-card">
-          <div class="pain-icon">📦</div>
+          <div class="pain-icon icon-circle">📦</div>
           <h3>被り景品の行き場がない</h3>
           <p>同じ景品が何個も出てしまい、収納にも困るし手放す手段もない。</p>
         </div>
         <div class="pain-card">
-          <div class="pain-icon">🗺️</div>
+          <div class="pain-icon icon-circle">🗺️</div>
           <h3>在庫情報がバラバラ</h3>
           <p>SNSで探しても情報が古かったり、正確な設置場所が分からない。</p>
         </div>
@@ -88,22 +90,26 @@
       <p class="section-lead">在庫の「見える化」と、ユーザー同士の「交換」で、ガシャ活をもっと楽しく効率的に。</p>
       <div class="feature-grid">
         <div class="feature-card">
-          <div class="feature-badge">MAP</div>
+          <div class="feature-icon icon-circle">🗺️</div>
+          <span class="feature-badge">MAP</span>
           <h3>リアルタイム在庫マップ</h3>
           <p>近くのガシャポン設置店舗の在庫状況を地図上で確認。今どこに何が残っているかが一目で分かります。</p>
         </div>
         <div class="feature-card">
-          <div class="feature-badge">SWAP</div>
+          <div class="feature-icon icon-circle">🔄</div>
+          <span class="feature-badge">SWAP</span>
           <h3>ユーザー間トレード掲示板</h3>
           <p>被った景品を出品し、欲しい人と交換。コンプリートまでの最後の一歩を後押しします。</p>
         </div>
         <div class="feature-card">
-          <div class="feature-badge">POST</div>
+          <div class="feature-icon icon-circle">📮</div>
+          <span class="feature-badge">POST</span>
           <h3>投稿でみんなに貢献</h3>
           <p>見つけた在庫を投稿してコミュニティに共有。新鮮な情報がどんどん集まる仕組みです。</p>
         </div>
         <div class="feature-card">
-          <div class="feature-badge">POINT</div>
+          <div class="feature-icon icon-circle">⭐</div>
+          <span class="feature-badge">POINT</span>
           <h3>ポイントシステム（開発中）</h3>
           <p>在庫投稿でポイントを獲得し、自分のトレード投稿の露出を上げられる仕組みを設計中です。</p>
         </div>
@@ -134,6 +140,23 @@
     </div>
   </section>
 
+  <section id="demo" class="section demo">
+    <div class="wrap">
+      <h2 class="section-title">実際の画面</h2>
+      <p class="section-lead">操作の様子はデモ動画でご覧いただけます。</p>
+      <div class="demo-frame-wrap">
+        <div class="phone-mock">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen demo-screen">
+              <span class="demo-placeholder">動画準備中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="tech" class="section tech">
     <div class="wrap">
       <h2 class="section-title">技術スタック</h2>
@@ -156,14 +179,27 @@
   <section id="team" class="section team">
     <div class="wrap">
       <h2 class="section-title">チーム体制</h2>
-      <div class="team-grid">
-        <div class="team-card">
-          <h3>4人体制での開発</h3>
-          <p>要件定義はマインドマップとユーザーストーリーを組み合わせて整理。Issue/PRフローなど、なぜその工程が必要かを言語化したチーム開発プロセスのもとで進めています。</p>
+      <p class="section-lead">要件定義はマインドマップとユーザーストーリーを組み合わせて整理。Issue/PRフローなど、なぜその工程が必要かを言語化したチーム開発プロセスのもとで、4人体制で進めています。</p>
+      <div class="member-grid">
+        <div class="member-card">
+          <img src="img/member-siderryo.png" alt="" class="member-avatar">
+          <h3 class="member-name">しでりょう</h3>
+          <p class="member-role">PM・クライアントエンジニア</p>
         </div>
-        <div class="team-card">
-          <h3>PM 兼 クライアントエンジニア</h3>
-          <p>メンバーごとのDiscordチャンネルで参考記事とその理由を共有し合う仕組みを運用。設計から実装まで一貫して関わっています。</p>
+        <div class="member-card">
+          <img src="img/member-pon.png" alt="" class="member-avatar">
+          <h3 class="member-name">ぽん</h3>
+          <p class="member-role">バックエンド・クライアントエンジニア</p>
+        </div>
+        <div class="member-card">
+          <img src="img/member-natsurun.png" alt="" class="member-avatar">
+          <h3 class="member-name">なつるん</h3>
+          <p class="member-role">クライアントエンジニア・デザイナー</p>
+        </div>
+        <div class="member-card">
+          <img src="img/member-chos.png" alt="" class="member-avatar">
+          <h3 class="member-name">ちょす</h3>
+          <p class="member-role">クライアントエンジニア・デザイナー</p>
         </div>
       </div>
     </div>
@@ -174,7 +210,7 @@
       <h2>Gashamaプロジェクトについて</h2>
       <p>ソースコードや開発の進め方に興味がある方は、GitHubリポジトリをご覧ください。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHubリポジトリへ（リンクを設定してください）</a>
+        <a class="btn btn-primary" href="https://github.com/Team-Seishun/Gashama" target="_blank" rel="noopener noreferrer">GitHubリポジトリを見る</a>
       </div>
     </div>
   </section>

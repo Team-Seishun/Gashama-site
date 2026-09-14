@@ -7,12 +7,10 @@
   --text-muted: #6b6178;
   --border: #f0e2d0;
 
-  --brand-1: #ff6f91;   /* pink capsule */
-  --brand-2: #ffb84c;   /* orange capsule */
-  --brand-3: #6bcBef;   /* blue capsule */
-  --brand-3: #6bc6ef;
-  --brand-4: #8f7cf2;   /* purple capsule */
-  --brand-ink: #d64570;
+  --brand-1: #ff8a3d;   /* orange, from the app icon */
+  --brand-2: #ffb84c;   /* amber, secondary warm tone */
+  --brand-3: #6bc6ef;   /* blue, minor accent only */
+  --brand-ink: #e8590c; /* deep orange, primary buttons/links/text */
 
   --shadow-sm: 0 2px 8px rgba(43, 35, 51, 0.06);
   --shadow-md: 0 12px 28px rgba(43, 35, 51, 0.10);
@@ -135,52 +133,222 @@ a { color: inherit; }
   color: var(--text);
 }
 
-.logo-capsule {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--brand-1) 50%, #fff 50%);
-  border: 2px solid var(--brand-ink);
-  box-shadow: var(--shadow-sm);
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
   flex: none;
 }
-
-.nav {
-  display: flex;
-  gap: 28px;
-  font-weight: 500;
-  font-size: 0.94rem;
-}
-.nav a { text-decoration: none; color: var(--text-muted); }
-.nav a:hover { color: var(--brand-ink); }
 
 .header-cta { flex: none; font-size: 0.88rem; }
 
 @media (max-width: 780px) {
-  .nav { display: none; }
+  .header-inner { padding-top: 10px; padding-bottom: 10px; gap: 12px; }
+  .logo { font-size: 1.1rem; gap: 8px; }
+  .logo-icon { width: 28px; height: 28px; }
+  .header-cta { padding: 8px 16px; font-size: 0.82rem; }
+}
+
+/* ---------- Section tabs ---------- */
+/* Sits right below the hero intro. Sticks under the site header (via
+   --header-h, measured in script.js) once scrolled up to it, so it
+   keeps following like the reference site's tab bar. */
+.section-tabs-sentinel {
+  height: 0;
+}
+
+.section-tabs {
+  position: sticky;
+  top: var(--header-h, 64px);
+  z-index: 15;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.2s ease;
+}
+.section-tabs.is-stuck {
+  box-shadow: var(--shadow-sm);
+}
+
+.section-tabs-inner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.section-tabs-inner::-webkit-scrollbar { display: none; }
+
+.tab-link {
+  flex: none;
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 16px 0;
+  white-space: nowrap;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+.tab-link:hover { color: var(--brand-ink); }
+.tab-link.is-active {
+  color: var(--text);
+  font-weight: 900;
+}
+
+/* Slides under whichever tab is active, positioned via script.js so
+   the current section is obvious at a glance. */
+.tab-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 0;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-ink));
+  opacity: 0;
+  transition: left 0.3s ease, width 0.3s ease, opacity 0.2s ease;
+}
+.tab-indicator.is-ready { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-indicator { transition: opacity 0.2s ease; }
+}
+
+@media (max-width: 780px) {
+  .section-tabs-inner { gap: 22px; }
+  .tab-link { font-size: 0.86rem; padding: 12px 0; }
+}
+
+.section,
+#cta {
+  scroll-margin-top: var(--sticky-h, 120px);
 }
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 88px 0 96px;
+  /* Fills roughly the first screen (minus the sticky header) so the
+     app name sits near the middle of the initial view, especially on
+     phones, and the tab bar below it starts a little further down. */
+  min-height: calc(100vh - var(--header-h, 64px));
+  min-height: calc(100svh - var(--header-h, 64px));
+  padding: 56px 0;
+  margin: 0;
   overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  border-radius: 0;
+  background:
+    radial-gradient(120% 140% at 15% -10%, rgba(255, 255, 255, 0.22), transparent 55%),
+    radial-gradient(90% 120% at 100% 110%, rgba(255, 255, 255, 0.14), transparent 55%),
+    linear-gradient(155deg, var(--brand-2) 0%, var(--brand-1) 45%, var(--brand-ink) 100%);
+  transition: padding 0.4s ease, margin 0.4s ease, border-radius 0.4s ease, min-height 0.4s ease;
 }
-.hero::before {
-  content: "";
+
+/* Compact state: toggled by script.js once the page has scrolled a
+   little, echoing the reference site's shrinking hero banner. Height
+   is kept close to the base state (rather than shrunk to fit-content)
+   so the app overview that swaps in stays centered on screen too. */
+.hero.is-compact {
+  padding: 40px 0 64px;
+  margin: 0 16px;
+  border-radius: 32px;
+}
+.hero.is-compact .hero-wordmark {
+  font-size: clamp(2.1rem, 6.5vw, 3.4rem);
+}
+.hero.is-compact .hero-wordmark-icon {
+  width: clamp(34px, 5.5vw, 52px);
+  height: clamp(34px, 5.5vw, 52px);
+}
+.hero.is-compact .eyebrow {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0 14px;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .hero-wordmark,
+  .hero-wordmark-icon,
+  .eyebrow {
+    transition: none;
+  }
+}
+
+.hero-decor {
   position: absolute;
-  inset: -20% -10% auto -10%;
-  height: 480px;
-  background: radial-gradient(60% 60% at 30% 20%, color-mix(in srgb, var(--brand-1) 22%, transparent), transparent 70%),
-              radial-gradient(50% 50% at 80% 10%, color-mix(in srgb, var(--brand-3) 22%, transparent), transparent 70%);
-  z-index: -1;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  filter: blur(1px);
+  opacity: 0.7;
+}
+.hero-glow--1 {
+  width: 10px;
+  height: 10px;
+  top: 20%;
+  left: 14%;
+  animation: hero-float-y 5s ease-in-out infinite;
+}
+.hero-glow--2 {
+  width: 7px;
+  height: 7px;
+  top: 32%;
+  right: 18%;
+  animation: hero-float-y 4s ease-in-out infinite reverse;
+}
+
+.hero-float {
+  position: absolute;
+  border-radius: 22%;
+  opacity: 0.5;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.15));
+}
+.hero-float--1 {
+  width: 68px;
+  top: 12%;
+  left: 9%;
+  transform: rotate(-18deg);
+  animation: hero-float-y 7s ease-in-out infinite;
+}
+.hero-float--2 {
+  width: 52px;
+  top: 18%;
+  right: 11%;
+  transform: rotate(14deg);
+  animation: hero-float-y 6s ease-in-out infinite 1s;
+}
+
+@keyframes hero-float-y {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow, .hero-float { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-float { display: none; }
 }
 
 .hero-inner {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -188,88 +356,225 @@ a { color: inherit; }
   font-weight: 700;
   font-size: 0.82rem;
   letter-spacing: 0.06em;
-  color: var(--brand-ink);
-  background: color-mix(in srgb, var(--brand-1) 14%, transparent);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
   padding: 6px 14px;
   border-radius: 999px;
+  margin-bottom: 22px;
+  transition: opacity 0.3s ease, height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+}
+
+.hero-wordmark-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.4vw, 22px);
   margin-bottom: 18px;
 }
 
-.hero h1 {
-  font-size: clamp(2rem, 4vw, 2.9rem);
-  font-weight: 900;
-  letter-spacing: -0.01em;
+.hero-wordmark-icon {
+  width: clamp(48px, 9vw, 84px);
+  height: clamp(48px, 9vw, 84px);
+  border-radius: 24%;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  transition: width 0.4s ease, height 0.4s ease;
 }
-.hero h1 .accent { color: var(--brand-ink); }
+
+.hero-wordmark {
+  margin: 0;
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.1rem, 11vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  transition: font-size 0.4s ease;
+}
+
+/* Crossfade between the catchphrase and the app overview: both sit in
+   the same grid cell so the swap has no layout jump, driven by the
+   .hero.is-compact class toggled from script.js on scroll. */
+.hero-copy-swap {
+  display: grid;
+  max-width: 46ch;
+  margin: 0 auto 20px;
+}
+.hero-copy-swap > * {
+  grid-area: 1 / 1;
+  margin: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-tagline {
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-size: clamp(1.1rem, 2.6vw, 1.55rem);
+  font-weight: 700;
+  color: #fff;
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero-tagline .accent {
+  background: rgba(255, 255, 255, 0.22);
+  padding: 0 8px;
+  border-radius: 8px;
+}
 
 .hero-lead {
-  font-size: 1.06rem;
-  max-width: 46ch;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+.hero-overview {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.hero.is-compact .hero-tagline {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+.hero.is-compact .hero-overview {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy-swap > * { transition: none; }
 }
 
 .hero-actions {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 30px;
 }
 
-/* Hero illustration: simple capsule machine made of CSS shapes */
-.hero-art { display: flex; justify-content: center; }
-
-.capsule-machine {
+.hero-summary-section {
   position: relative;
-  width: 280px;
-  height: 320px;
-  background: linear-gradient(180deg, var(--surface), var(--bg-soft));
-  border: 3px solid var(--text);
-  border-radius: 140px 140px 24px 24px / 160px 160px 24px 24px;
+  z-index: 1;
+  padding: 0 0 24px;
+}
+
+.hero-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: -64px auto 0;
+  padding: 32px 28px;
+  max-width: 920px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  overflow: visible;
+}
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.summary-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-1) 20%, var(--surface)), color-mix(in srgb, var(--brand-2) 24%, var(--surface)));
+  margin-bottom: 2px;
+}
+.summary-label {
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: var(--brand-ink);
+  background: color-mix(in srgb, var(--brand-1) 14%, transparent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.summary-item dd {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
 }
 
-.capsule-machine::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -34px;
-  transform: translateX(-50%);
-  width: 110px;
-  height: 40px;
+@media (max-width: 780px) {
+  .hero-summary { grid-template-columns: 1fr; }
+}
+
+/* Phone mockup frame, reused by the "実際の画面" section to house a
+   real screen-recording video once one is available. */
+.phone-mock {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.phone-frame {
+  position: relative;
+  width: 230px;
+  height: 470px;
   background: var(--text);
-  border-radius: 10px;
+  border-radius: 40px;
+  padding: 10px;
+  box-shadow: var(--shadow-md);
 }
 
-.capsule {
+.phone-notch {
   position: absolute;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 2.5px solid var(--text);
-  background: linear-gradient(180deg, var(--c, var(--brand-1)) 50%, #fff 50%);
-}
-.capsule.c1 { --c: var(--brand-1); top: 60px; left: 40px; }
-.capsule.c2 { --c: var(--brand-2); top: 50px; left: 110px; width: 54px; height: 54px; }
-.capsule.c3 { --c: var(--brand-3); top: 100px; left: 175px; }
-.capsule.c4 { --c: var(--brand-4); top: 120px; left: 70px; width: 40px; height: 40px; }
-.capsule.c5 { --c: var(--brand-2); top: 150px; left: 140px; width: 48px; height: 48px; }
-
-.pin {
-  position: absolute;
-  right: 26px;
-  top: 40px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 2.5px solid var(--text);
-  background: var(--brand-ink);
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 18px;
+  background: var(--text);
+  border-radius: 0 0 12px 12px;
+  z-index: 2;
 }
 
-@media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; text-align: center; }
-  .hero-lead { margin-left: auto; margin-right: auto; }
-  .hero-actions { justify-content: center; }
-  .hero-art { order: -1; }
+.phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-frame-wrap { display: flex; justify-content: center; margin-top: 44px; }
+
+.demo-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+.demo-placeholder {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* Tighten vertical rhythm on small screens so the page reaches its
+   actual content within a couple of screens instead of several. */
+@media (max-width: 640px) {
+  .hero { padding: 40px 0; }
+  .hero-wordmark-row { flex-direction: column; gap: 10px; margin-bottom: 12px; }
+  .hero-summary { padding: 18px; gap: 20px; margin-top: -40px; }
+  .section { padding: 56px 0; }
+  .section-lead { margin-bottom: 32px; }
+  .cta { padding: 48px 20px; margin: 0 16px; }
 }
 
 /* ---------- Sections ---------- */
@@ -301,10 +606,28 @@ a { color: inherit; }
   border-radius: var(--radius-md);
   padding: 32px 26px;
   box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.pain-icon { font-size: 1.9rem; margin-bottom: 14px; }
+.pain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.pain-icon { margin-bottom: 16px; }
 .pain-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
 .pain-card p { margin: 0; font-size: 0.95rem; }
+
+/* Colored circular icon badge shared by pain/feature cards */
+.icon-circle {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-1) 22%, var(--surface)), color-mix(in srgb, var(--brand-2) 26%, var(--surface)));
+  box-shadow: var(--shadow-sm);
+}
 
 .feature-grid {
   display: grid;
@@ -319,14 +642,20 @@ a { color: inherit; }
   padding: 32px;
   box-shadow: var(--shadow-sm);
   position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.feature-icon { margin-bottom: 14px; }
 .feature-badge {
   display: inline-block;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   color: #fff;
-  background: linear-gradient(135deg, var(--brand-1), var(--brand-4));
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-ink));
   padding: 5px 12px;
   border-radius: 999px;
   margin-bottom: 16px;
@@ -335,6 +664,7 @@ a { color: inherit; }
 .feature-card p { margin: 0; font-size: 0.95rem; }
 
 .how { background: var(--bg-soft); }
+.tech { background: var(--bg-soft); }
 
 .steps {
   list-style: none;
@@ -350,6 +680,11 @@ a { color: inherit; }
   border-radius: var(--radius-md);
   padding: 30px 26px;
   box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.step:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 .step-num {
   display: flex;
@@ -386,24 +721,45 @@ a { color: inherit; }
 }
 
 .team { background: var(--bg-soft); }
-.team-grid {
+.member-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
-.team-card {
+.member-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 30px;
+  padding: 26px 20px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.member-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--surface);
+  outline: 2px solid color-mix(in srgb, var(--brand-1) 40%, var(--border));
   box-shadow: var(--shadow-sm);
 }
-.team-card h3 { font-size: 1.05rem; }
-.team-card p { margin: 0; font-size: 0.94rem; }
+.member-name { font-size: 1rem; margin-bottom: 2px; }
+.member-role {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--brand-ink);
+  margin: 0;
+}
 
 .cta {
   text-align: center;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-1) 16%, var(--bg)), color-mix(in srgb, var(--brand-4) 16%, var(--bg)));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--brand-1) 18%, var(--bg)), color-mix(in srgb, var(--brand-2) 22%, var(--bg)));
   border-radius: var(--radius-lg);
   margin: 0 24px;
   padding: 72px 24px;
@@ -425,9 +781,14 @@ a { color: inherit; }
 }
 
 @media (max-width: 860px) {
-  .card-grid, .feature-grid, .steps, .team-grid {
+  .card-grid, .feature-grid, .steps {
     grid-template-columns: 1fr;
   }
+  .member-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .member-grid { grid-template-columns: 1fr; }
 }
 
 /* Scroll reveal: content is visible by default; JS only upgrades it
